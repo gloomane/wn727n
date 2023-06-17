@@ -1,0 +1,17 @@
+sudo git clone https://github.com/ivanovborislav/rtl8188eu.git
+sudo cd rtl8188eu
+sudo apt-get install bc build-essential
+sudo apt-get install linux-headers-$(uname -r)
+sudo apt-cache search linux-headers
+sudo apt-get install linux-headers-5.14.0-kali4-amd64 (for example)
+sudo apt-cache search linux-image
+sudo apt-get install linux-image-5.14.0-kali4-amd64 (for example)
+sudo make
+sudo make install
+sudo chmod +x install.sh
+sudo ./install.sh -i
+sudo printf "blacklist r8188eu\n" > /etc/modprobe.d/realtek.conf
+
+reboot
+
+sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/wireless/8188eu.ko rtw_ips_mode=1 rtw_drv_log_level=4 rtw_power_mgnt=2 rtw_led_ctrl=1
